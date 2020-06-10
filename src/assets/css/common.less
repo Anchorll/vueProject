@@ -1,0 +1,92 @@
+@blackgray:#50514f;
+@red:#f25f5c;
+@yellow:#ffe066;
+@blue:#247ba0;
+@bluegreen:#70c1b3;
+@white:#ffffff;
+@black:#000000;
+html,body,ol,ul,li,div,button,select,p,a,input,span,i,b,form,iframe,h1,h2,h3,h4,h5,h6,img,table,td,tr,textarea{
+    margin: 0px;
+    padding: 0px;
+}
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+ li {
+     list-style: none;
+ }
+input{
+    outline: none;
+}
+.fr{
+    float: right;
+    
+}
+
+.fl{
+    float:left;
+}
+.cf{
+    clear:both;
+}
+.alpha(@val:0.5){
+    filter:alpha(opacity=50);  /*支持 IE 浏览器*/
+    -moz-opacity:@val; /*支持 FireFox 浏览器*/
+    -khtml-opacity:@val; /*webkit内核浏览器*/
+    opacity:@val;  /*支持 Chrome, Opera, Safari 等浏览器*/
+}
+/*多行/单行文本溢出省略号*/
+.sigrow{
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.numsrow(@row:3){
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:@row;
+}
+//圆角
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.hide{
+    display: none;
+}
+.btn(@color:red){
+    display: inline-block;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    color: @white;
+    background-color:@color;
+}
+header{
+    height: 6vh;
+    line-height: 6vh;
+    background:@blue;
+    color: @white;
+    img{
+        float: left;
+        height: 4vh;
+        margin: 1vh 10px 0 2%;
+    }
+    .title{
+      float: left;
+    }
+    p,a{
+        float: right;
+        margin-right: 2%;
+        cursor:pointer;
+    }
+}
+.showpanel{
+    min-height:90vh;
+}
