@@ -1,112 +1,81 @@
 <template>
-	<div id="">
-		<el-menu
-      default-active="1"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose">
-      
-      <router-link to='/assets_list'>
-	  	 <el-menu-item index="1">
-	        <i class="el-icon-menu"></i>
-	        <span slot="title">资产统计</span>
-	      </el-menu-item>
-      </router-link>
-     
-     <router-link to='/assets_list'>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">资产列表</span>
-      </el-menu-item>
-      </router-link>
-      
-      <router-link to='/user_list'>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">用户列表</span>
-      </el-menu-item>
-      </router-link>
-      
-      <router-link to='/assets_type'>
-       <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">资产类型管理</span>
-      </el-menu-item>
-      </router-link>
-      
-      <router-link to='/area_list'>
-      <el-menu-item index="5">
-        <i class="el-icon-setting"></i>
-        <span slot="title">区域管理</span>
-      </el-menu-item>
-      </router-link>
-      
-      <router-link to='/user_list'>
-      <el-menu-item index="6">
-        <i class="el-icon-document"></i>
-        <span slot="title">数据库管理</span>
-      </el-menu-item>
-      </router-link>
-    </el-menu>	
-	</div>
+ <div>
+    <header>
+     <div class="blog-info">
+       <p class="blog-title">xxxxxxxxx</p>
+       <p class="weather-info">天气预报|公告</p>
+     </div>
+     <div class="menu">
+         <el-menu
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="horizontal"
+          @select="handleSelect"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b">
+          <el-menu-item  v-for="(item,index) in menu " :key="index" :index="item.path">{{item.name}}</el-menu-item>
+
+        </el-menu>
+     </div>
+    </header>
+ </div>
 </template>
 
 <script>
-	
   export default {
-    data() {
-      return {
-        data: [],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
+      data() {
+        return {
+          activeIndex: '/Index',
+          menu:[
+            {name:"首页",path:"/Index"},
+            {name:"管理",path:"/Manage"},
+            {name:"问答",path:"/Question"},
+          ]
+        };
+      },
+      methods: {
+        handleSelect(key, keyPath) {
+         this.$router.push(keyPath[0])
         }
-      };
-    },
-    methods: {
-      handleNodeClick(data,_node,ele) {
-      	 let key = this.$refs.tree.getCurrentKey();
-      	console.log(key);
-      	var router=data.router;
-      	this.$router.push({name: router})
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       }
     }
-  };
 </script>
 
-<style lang="less">
-	@import "../assets/css/common.less";
-	.el-menu {
-     border-right:none; 
-     background: @blue+20;
-	}
-	.el-menu-item{
-		background:@blue;
-		text-align:left;
-		margin-bottom: 1px;
-		i{
-			color: @white;
-		}
-		color:@white;
-	}
-	.is-active{
-		color: @blue;
-		background:@white;
-	}
-	.el-menu-item:hover{
-		background:@blue+(-50);
-		color:@blue+60;
-		i{
-			color:@blue+40;
-		}
-	}
-	.el-menu-item:focus {
-    background-color:@white;
+<style lang="less" scoped >
+  header{
+  /*  background-image: url(../assets/img/space2.jpg);
+    background-position: center;
+    background-size: cover; */
+  }
+ @import "../assets/css/common.less";
+.blog-info{
+  position: relative;
+  height: 10vh;
+  color:@red;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .blog-title{
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0 40px;
+  }
+}
+.menu{
+  position:relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background-color: @blackgray ;
+}
+.el-menu.el-menu--horizontal {
+    border-bottom: none;
+}
+.el-menu-demo{
+  width: 75%;
+  .el-menu-item{
+    padding:0 20px ;
+  }
 }
 </style>

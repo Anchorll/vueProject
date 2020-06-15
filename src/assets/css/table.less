@@ -1,16 +1,25 @@
+@import "common.less";
 .operation{
     position: relative;
     width: 96%;
     padding:8px 2%;
+    overflow: hidden;
+    display: flex;
+    justify-content:flex-end;
     .el-select{
-       float:left;
-       width:100px;
-       margin: 0 5px;
+       width:120px;
+    }
+    .el-option{
+       text-align: center;
+      
     }
      .el-input{
-        float:left;
         width:100px;
         margin: 0 5px;
+    }
+    .query-btn{
+      background-color: @red;
+      border: none;
     }
 }
 
@@ -18,7 +27,7 @@
     width: 96%;
     margin: 0 auto;
     border-top: 2px solid @red;
-  
+
 }
 .el-table td,.el-table th{
     padding:5px 0;

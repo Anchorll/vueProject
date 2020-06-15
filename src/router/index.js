@@ -1,56 +1,42 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '../components/HelloWorld'
-import Login from '../components/login'
-import Index from '../components/index'
-import AssetsList from '../components/assets_list'
-import UserList from '../components/user_list'
-import AssetsTypeList from '../components/assets_type'
-import AreaList from '../components/area_list'
+import HelloWorld from '@/components/HelloWorld'
+import Main from '@/views/main.vue'
+import Index from '@/views/index.vue'
+import Manage from '@/views/manage.vue'
+import Question from '@/views/question.vue'
+import Details from '@/views/details.vue'
+
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-   /* {
+  routes: [{
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },*/
-     {
-      path: '/',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/index',
-      name: 'Index',
-      component: Index,
-      redirect:'/assets_list',
-      meta:{
-	  		auth:true,
-	  	},
-	  	children: [
-        {
-          name: 'AssetsList',
-     			component: AssetsList,
-          path: '/assets_list',
+      name: 'Main',
+      component: Main,
+      redirect: '/Index',
+      children: [{
+          name: 'Index',
+          component: Index,
+          path: '/Index',
         },
         {
-          name: 'UserList',
-     			component: UserList,
-          path: '/user_list',
+          name: 'Manage',
+          component: Manage,
+          path: '/Manage',
         },
         {
-          name: 'AssetsTypeList',
-     			component:AssetsTypeList,
-          path: '/assets_type',
+          name: 'Question',
+          component: Question,
+          path: '/Question',
         },
         {
-          name: 'AreaList',
-     			component:AreaList,
-          path: '/area_list',
-        }
+          name: 'Details',
+          component: Details,
+          path: '/Details/:type/:id',
+        },
       ]
-    }
+    },
+
   ]
 })
