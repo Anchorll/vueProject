@@ -1,6 +1,6 @@
 <template>
  <div class="user-info">
-      <img src="../assets/img/space1.jpg" class="head-img"/>
+      <img src="/static/img/space1.jpg" class="head-img"/>
       <p class="nick-name">xxxxxxxx</p>
       <p class="moto">我们的征途是星辰大海</p>
  </div>
@@ -28,7 +28,6 @@
     flex-direction: column;
     background-color: rgba(0,0,0,0.15);
     color: @blackgray;
-    margin-top: 10px;
     .head-img{
       width: 80px;
       height: 80px;

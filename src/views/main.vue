@@ -3,7 +3,7 @@
    <!-- <div class="bg"></div> -->
  <header-navi></header-navi>
  <div class="main">
-   <user-info></user-info>
+   <!-- <user-info></user-info> -->
    <router-view class="panel" ></router-view>
  </div>
  </div>
@@ -13,11 +13,11 @@
 
 <script>
   import headerNavi from '@/components/navi.vue'
-   import userInfo from '@/components/userInfo.vue'
+   // import userInfo from '@/components/userInfo.vue'
   export default{
     components:{
       headerNavi,
-      userInfo
+     /* userInfo */
     }
   }
 </script>
@@ -43,13 +43,12 @@
   width: 80%;
   position:relative;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
   min-height: 81.5vh;
+  padding-bottom: 20px;
   .panel{
     margin-top: 10px;
-    width: 80.5%;
-    background-color: @white;
+    width: 100%;
+    padding:0 0 20px 0 ;
   }
 }
 </style>

@@ -2,7 +2,7 @@
  <div>
     <header>
      <div class="blog-info">
-       <p class="blog-title">xxxxxxxxx</p>
+       <p class="blog-title" @click="gotoAdmin">xxxxxxxxx</p>
        <p class="weather-info">天气预报|公告</p>
      </div>
      <div class="menu">
@@ -29,14 +29,22 @@
           activeIndex: '/Index',
           menu:[
             {name:"首页",path:"/Index"},
-            {name:"管理",path:"/Manage"},
             {name:"问答",path:"/Question"},
-          ]
+            {name:"分类",path:"/Manage"},
+            {name:"关于我",path:"/PersonalCenter"},
+          ],
+          count:0,
         };
       },
       methods: {
         handleSelect(key, keyPath) {
          this.$router.push(keyPath[0])
+        },
+        gotoAdmin(){
+          this.count++
+          if(this.count==7){
+            this.$router.push({name: 'admin'})
+          }
         }
       }
     }

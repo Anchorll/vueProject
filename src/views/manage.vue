@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <el-table :data="tableData"
     stripe @selection-change="handleSelectionChange"
     style="width: 98%;margin: 0 auto;background-color: rgba(255,255,255,0.1);"
@@ -16,16 +17,19 @@
       		</el-button>
       	</template>
       </el-table-column>
-
     </el-table>
-
     <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="1" :page-sizes="[10, 20, 30, 40]" :page-size="10" layout="total, sizes, prev, pager, next, jumper" :total="10">
     </el-pagination>
   </div>
 </template>
 
 <script>
+ import userInfo from '@/components/userInfo.vue'
+
   export default{
+    components:{
+     userInfo
+    },
     data () {
       return{
         tableData: [{title:'分类1',date:'2020年6月2日'},

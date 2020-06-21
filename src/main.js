@@ -7,11 +7,37 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import less from 'less'
 import 'element-ui/lib/theme-chalk/index.css'
+import VueLazyload from 'vue-lazyload'
+import * as utils from '@/utils/utils'
+import store from './store'
 Vue.config.productionTip = false
+const myPlugins = function (Vue,) {
+  Vue.prototype.$utils = utils
+}
+Vue.use(myPlugins)
 Vue.use(ElementUI)
 Vue.prototype.$http=axios
-
+Vue.prototype.$store=store 
 Vue.use(less)
+Vue.use(VueLazyload, {
+
+  error: 'dist/error.png',
+
+  loading: 'dist/loading.gif'
+
+});
+router.beforeEach((to, from, next) => {
+  console.log("to")
+  if (to.matched.some(m => m.meta.auth)) {
+    if (store.getters.getIsLogin === '1') {
+      next()
+    } else if (to.path !== '/') {
+      next({path: '/login'})
+    }
+  } else {
+    next()
+  }
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
