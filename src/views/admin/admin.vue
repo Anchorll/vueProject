@@ -34,7 +34,7 @@
   @import "../../assets/css/common.less";
  .main{
    display: flex;
-  justify-content: space-between;
+    justify-content: space-between;
  }
 .header{
   background-color: @blue;
@@ -46,7 +46,6 @@
 }
 .panel{
   width: 90%;
-  background-color: red;
   min-height: 92vh;
 }
 </style>

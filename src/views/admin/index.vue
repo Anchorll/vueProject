@@ -1,8 +1,8 @@
 <template>
   <div class="content">
-  <div class="main">
-    adindex
-  </div>
+    <div class="c-main">
+      adindex
+    </div>
   </div>
 </template>
 
