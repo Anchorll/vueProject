@@ -10,9 +10,9 @@
                 <el-option v-for="(item,index) in kindArray" :label="item.name" :value="item.id"></el-option>
           </el-select>
        </el-form-item>
-       <el-form-item label="标签：" prop="kind">
+       <el-form-item label="标签：" prop="tag">
          <el-checkbox-group v-model="formData.checkList">
-            <el-checkbox :label="item.name" v-for="(item,index) in formData.tag"></el-checkbox>
+            <el-checkbox :label="item.name"  name="tag" v-for="(item,index) in formData.tag"></el-checkbox>
           </el-checkbox-group>
        </el-form-item>
        <!-- <el-form-item label="附件添加：" prop=""></el-form-item> -->
@@ -79,7 +79,7 @@
              return match
            }
          })
-         this.content = string
+         this.formData.content = string
          console.log(string)
       },
       getKind(){
@@ -89,7 +89,7 @@
             pageSize:10
           }
         }).then( res => {
-         this.kindArray=res.data.content.records
+         this.kindArray=res.data.content
         })
 
 
@@ -101,16 +101,23 @@
           pageSize:10
         }
         }).then( res => {
-         this.formData.tag=res.data.content.records
+         this.formData.tag=res.data.content
+         console.log(this.formData.tag)
         })
       },
       submit(){
         console.log(this.formData)
-       // this.$http.post('/api//post-article/addAritcle',{
 
-       // }).then( res => {
-       //   // this.tableData=res.data.content.records
-       // })
+       this.$http.post('/api/post-article/addAritcle',{
+        author:"cll",
+        kindId:this.formData.kind,
+        message:this.formData.content,
+        labelId:"710189441389563900",
+        title:this.formData.title,
+        userId:"715987215280377856"
+       }).then( res => {
+         // this.tableData=res.data.content.records
+       })
       }
     }
   }
