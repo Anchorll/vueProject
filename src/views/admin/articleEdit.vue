@@ -7,12 +7,12 @@
        </el-form-item>
        <el-form-item label="分类：" prop="kind">
           <el-select v-model="formData.kind" placeholder="请选择分类">
-                <el-option v-for="(item,index) in kindArray" :label="item.name" :value="item.id"></el-option>
+                <el-option v-for="(item,index) in kindArray" :label="item.name" :value="item.id" :key="item.id"></el-option>
           </el-select>
        </el-form-item>
        <el-form-item label="标签：" prop="tag">
          <el-checkbox-group v-model="formData.checkList">
-            <el-checkbox :label="item.name"  name="tag" v-for="(item,index) in formData.tag"></el-checkbox>
+            <el-checkbox :label="item.name"  name="tag" v-for="(item,index) in formData.tag" :key="item.id"></el-checkbox>
           </el-checkbox-group>
        </el-form-item>
        <!-- <el-form-item label="附件添加：" prop=""></el-form-item> -->
