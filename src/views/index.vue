@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="content">
     <user-info></user-info>
-    <list :tableData="tableData"></list>
+    <List :getList="getList" class="lista"></List>
   </div>
 </template>
 
@@ -27,16 +27,16 @@
       }
     },
     mounted() {
-      this.getArticleList()
+
     },
     methods:{
-    
-      getArticleList(){
-        this.$http.get('/api/post-article/aritclePage',{params:{
+
+      getList(){
+       return this.$http.get('/api/post-article/aritclePage',{params:{
           pageNo:1,
           pageSize:10
         }}).then( res => {
-          // this.tableData=res.data.content.records
+            return res
         })
       },
 
@@ -55,55 +55,11 @@
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="less" scoped="scoped">
   @import "../assets/css/common.less";
   @import "../assets/css/table.less";
-  .list{
-    position: relative;
-    width: 94%;
-    margin: 0 auto;
-    min-height: 80%;
-    padding:10px 0;
-    .art-list{
-      height: auto;
-      padding: 10px 0;
-      text-align: left;
-      border-bottom: 1.5px solid @whitegray;
-    }
-    .art-list:last-child{
-      border-bottom: none;
-    }
-    .art-title{
-      color: @black;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .art-content{
-     display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      color: @blackgray;
-      font-size: 14px;
-    }
-    .art-info{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width:260px;
-      font-size: 13px;
-      color: @iconcolor;
-      margin-top:10px;
-      img{
-        width: 20px;
-        height: 20px;
-      }
-      span{
-        min-width: 60px;
-        display: flex;
-        align-items: center;
-      }
-    }
+  .content{
+    display: flex;
+    justify-content: space-between;
   }
 </style>

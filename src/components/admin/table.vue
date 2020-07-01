@@ -16,26 +16,8 @@
           <slot name="extra-action" />
         </div>
         <slot name="action">
-          <div class="action">
-          <el-button
-            type="primary"
-
-            size="small"
-          >搜索</el-button>
-          <el-button
-
-            size="small"
-          >清空</el-button>
-          <slot name="child-action"></slot>
-          </div>
-          <div>
-            <slot name="another-filter"></slot>
-          </div>
         </slot>
       </el-form>
-    </div>
-    <div class="other-action">
-      <slot name="other-action"></slot>
     </div>
     <el-table
       :data="tableData"
@@ -54,11 +36,10 @@
       <div class="block pagination">
         <el-pagination
           background
-          :current-page="1"
-          :page-size="2"
+          :current-page="currentPage"
           :page-sizes="pageSizes"
           :layout="pageLayout"
-          :total="10"
+          :total="total"
           @current-change="handleCurrentChange"
           @size-change="handleSizeChange"
         >
@@ -76,7 +57,7 @@ export default {
       default () {
         return {
           pageNo: 1,
-          pageSize: 20
+          pageSize: 10
         }
       }
     },
@@ -98,7 +79,10 @@ export default {
   data () {
     return {
       tableData: [],
-      loadingList:false
+      loadingList:false,
+      total:0,
+      currentPage:1,
+      page_size:10
     }
   },
   mounted () {
@@ -110,19 +94,29 @@ export default {
   methods: {
 
     handleSizeChange (size) {
-      this.size = size
+      console.log(size)
     },
     handleCurrentChange (page) {
       this.current = page
     },
     cgetList(){
-      this.getList().then(res=>{
-          this.tableData = res.data.content.records || []
+      this.getList(this.params).then(res=>{
+        let data=res.data.content
+          this.tableData = data.records
+          this.page_size= data.pages
+          this.total=data.total
+          this.currentPage=data.current
       })
     }
   }
 }
 </script>
 <style lang="less">
-
+.action-wrapper{
+  padding: 10px;
+  text-align: right;
+}
+.pagination{
+  margin: 20px;
+}
 </style>

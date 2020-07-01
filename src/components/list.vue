@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="c-content">
       <div class="operation" style="text-align: right;">
       	<el-select v-model="qcondition" placeholder="按时间排序">
       		<el-option label="按时间排序" value="1"></el-option>
@@ -9,8 +9,8 @@
       	<el-input v-model="qval" placeholder="请输入内容" style="width:200px">
       		<i slot="prefix" class="el-input__icon el-icon-search"></i>
       	</el-input>
-      	<el-button type="primary" class="query-btn" style="background-color: @red;" @click="queryAssetsList">查询</el-button>
-        <el-button type="primary" class="query-btn" style="background-color: @red;" @click="ask">我要提问</el-button>
+      	<el-button type="primary" class="query-btn" style="background-color: @red;" @click="">查询</el-button>
+        <el-button type="primary" class="query-btn" style="background-color: @red;" @click="">我要提问</el-button>
       </div>
     <ul class="list">
       <li v-for="(item,index) in tableData" :key="index" class="art-list" @click="go2Details(0,item.id)">
@@ -31,16 +31,17 @@
 <script>
   export default{
     props:{
-      tableData:Array,
+      getList:Function
     },
     data () {
       return{
         qcondition:'',
         qval:'',
+        tableData:[]
       }
     },
     mounted() {
-
+      this.queryList()
     },
     methods:{
       // handleSizeChange(val) {
@@ -56,8 +57,12 @@
       // handleClose(done) {
       //   console.log("handleClose:"+val)
       // },
-	  queryAssetsList(){
-		  console.log("文章查询")
+
+	  queryList(){
+		  this.getList().then(res =>{
+        console.log(res)
+        this.tableData=res.data.content.records
+      })
 	  },
 	  ask(){
 		  console.log("我要提问")
@@ -69,12 +74,15 @@
 <style lang="less" scoped>
   @import "../assets/css/common.less";
   @import "../assets/css/table.less";
+  .c-content{
+    width: 82%;
+  }
+  .operation{
+  }
   .list{
     position: relative;
-    width: 94%;
-    margin: 0 auto;
     min-height: 80%;
-    padding:10px 0;
+    padding:0 10px;
     .art-list{
       height: auto;
       padding: 10px 0;

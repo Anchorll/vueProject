@@ -2,7 +2,7 @@
   <div class="content">
    <header class="header">后台管理系统</header>
   <div class="main">
-   <left-navi><</left-navi>
+   <left-navi class="leftnavi"></left-navi>
     <router-view class="panel" ></router-view>
   </div>
   </div>
@@ -34,6 +34,7 @@
   @import "../../assets/css/common.less";
  .main{
    display: flex;
+   width: 100%;
     justify-content: space-between;
  }
 .header{
@@ -44,8 +45,11 @@
   padding: 0 20px;
   text-align: left;
 }
+.leftnavi{
+  width: 15%;
+}
 .panel{
-  width: 90%;
+  width: 85%;
   min-height: 92vh;
 }
 </style>
