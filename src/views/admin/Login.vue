@@ -30,10 +30,13 @@
 			   userName:this.form.name,
 			   password:this.form.password
 		   }).then(res=>{
-
+          if(res.data.code==200){
+            this.$store.commit('$_setLogin', '1')
+            this.$store.commit('$_setStorage',res.data.content)
+            this.$router.push({name: 'admin'})
+          }
 		   })
-        this.$store.commit('$_setLogin', '1')
-        this.$router.push({name: 'admin'})
+
        }
       }
     }

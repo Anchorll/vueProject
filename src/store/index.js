@@ -7,7 +7,7 @@ const isLogin = 'isLogin'
 const store = new Vuex.Store({
   state () {
     return {
-      user:'',
+      user:[],
       isLogin: '0',
      
     }
