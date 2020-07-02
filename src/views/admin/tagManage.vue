@@ -1,11 +1,11 @@
 <template>
   <div class="content">
- <div class="c-main">
-   <List :getList="getLabelList">
-      <template slot="extra-action">
-       <el-button type="primary"@click="addNew">新增</el-button>
-      </template>
-      <template slot="table">
+    <div class="c-main">
+      <List :getList="getLabelList" ref="tablelist">
+        <template slot="extra-action">
+          <el-button type="primary" @click="addNew">新增</el-button>
+        </template>
+        <template slot="table">
           <el-table-column prop="name" label="名称" width="180">
           </el-table-column>
           <el-table-column prop="createAt" label="创建时间" width="180">
@@ -22,8 +22,8 @@
               </el-button>
             </template>
           </el-table-column>
-      </template>
-   </List>
+        </template>
+      </List>
 
 
 
@@ -39,7 +39,7 @@
           <el-button type="primary" @click="confirm()">确 定</el-button>
         </div>
       </el-dialog>
-  </div>
+    </div>
   </div>
 </template>
 
@@ -49,68 +49,86 @@
     components: {
       List
     },
-    data(){
-      return{
-        tableData:[],
-        dialogFormVisible:false,
-        form:{
-          name:''
+    data() {
+      return {
+        tableData: [],
+        dialogFormVisible: false,
+        form: {
+          name: ''
         },
-        dialogtitle:"新增标签",
+        dialogtitle: "新增标签",
       }
     },
     mounted() {
-     /* this.getLabelList() */
+      /* this.getLabelList() */
     },
-    methods:{
-      getLabelList(params){
-       return this.$http.get('/api/tab-label/showPageLabels',{params}).then(res=>{
-              this.tableData=res.data.content.records
-            return res
+    methods: {
+      getLabelList(params) {
+        return this.$http.get('/api/tab-label/showPageLabels', {
+          params
+        }).then(res => {
+          this.tableData = res.data.content.records
+          return res
         })
       },
-      edit(index,data){
-        this.dialogtitle="修改标签"
-        this.dialogFormVisible=true
-        this.form.name=data[index].name
-        this.form.id=data[index].id
+      edit(index, data) {
+        this.dialogtitle = "修改标签"
+        this.dialogFormVisible = true
+        this.form.name = data[index].name
+        this.form.id = data[index].id
       },
-      deleteRow(index,data){
-        console.log("删除",data[index])
+      deleteRow(index, data) {
+        console.log("删除", data[index])
         this.$confirm('此操作将永久删除该标签, 是否继续?', '提示', {
-                  confirmButtonText: '确定',
-                  cancelButtonText: '取消',
-                  type: 'warning'
-                }).then(() => {
-                  this.$message({
-                    type: 'success',
-                    message: '删除成功!'
-                  });
-                }).catch(() => {
-                  this.$message({
-                    type: 'info',
-                    message: '已取消删除'
-                  });
-                });
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
-      addNew(){
-        this.dialogFormVisible=true
-
+      addNew() {
+        this.dialogFormVisible = true
+        this.form.name = ''
+        this.form.id = ''
+        this.dialogtitle = '新增标签'
       },
-      confirm(){
-        if(this.dialogtitle==="新增标签"){
-        this.dialogFormVisible=false
-        console.log(this.form)
-        this.$http.post('/api/tab-label/addLabel',
-          this.form
-        ).then(res=>{
-
-        })
-        }else{
+      confirm() {
+        if (this.dialogtitle === "新增标签") {
+          this.dialogFormVisible = false
+          console.log(this.form)
+          this.$http.post('/api/tab-label/addLabel', {
+            name: this.form.name
+          }).then(res => {
+            if (res.data.code == 200) {
+              this.$message({
+                message: '新增成功！',
+                type: 'success'
+              });
+              this.dialogFormVisible = false
+               this.$refs.tablelist.refreshList()
+            }
+          })
+        } else {
           this.$http.post('/api/tab-label/updateLabel',
             this.form
-          ).then(res=>{
-
+          ).then(res => {
+            if (res.data.code == 200) {
+              this.$message({
+                message: '修改成功！',
+                type: 'success'
+              });
+              this.dialogFormVisible = false
+               this.$refs.tablelist.refreshList()
+            }
           })
         }
       }

@@ -65,6 +65,7 @@ export default {
       type: Function,
       required: true
     },
+   refreshTable:Function,
    pageLayout: {
         type: String,
         default: 'sizes, total, prev, pager, next, jumper'
@@ -82,7 +83,6 @@ export default {
       loadingList:false,
       total:0,
       currentPage:1,
-      page_size:10
     }
   },
   mounted () {
@@ -92,22 +92,30 @@ export default {
 
   },
   methods: {
-
     handleSizeChange (size) {
       console.log(size)
     },
     handleCurrentChange (page) {
-      this.current = page
+      this.currentPage = page
+      this.cgetList({ pageNo: page })
     },
-    cgetList(){
-      this.getList(this.params).then(res=>{
+    cgetList(data = {}){
+
+      const params = Object.assign(this.params,data)
+      console.log(params)
+      this.getList(params).then(res=>{
         let data=res.data.content
           this.tableData = data.records
-          this.page_size= data.pages
           this.total=data.total
           this.currentPage=data.current
+          console.log(res.data)
       })
-    }
+    },
+    refreshList (params) {
+      console.log('params: ', params)
+      const page = (this.currentPage = 1)
+      this.cgetList({ pageNo: page,pageSize:10,params })
+    },
   }
 }
 </script>

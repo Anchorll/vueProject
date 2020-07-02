@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="c-main">
-      <List :getList="getKindList">
+      <List :getList="getKindList" ref="tablelist">
         <template slot="extra-action">
           <el-button type="primary" @click="addNew">新增</el-button>
         </template>
@@ -49,10 +49,10 @@
       return {
         tableData: [],
         dialogFormVisible: false,
-        form:{
-          name:''
-          },
-         dialogtitle:"新增分类"
+        form: {
+          name: ''
+        },
+        dialogtitle: "新增分类"
       }
     },
     mounted() {
@@ -68,10 +68,10 @@
         })
       },
       edit(index, data) {
-       this.dialogtitle="修改标签"
-       this.dialogFormVisible=true
-       this.form.name=data[index].name
-       this.form.id=data[index].id
+        this.dialogtitle = "修改标签"
+        this.dialogFormVisible = true
+        this.form.name = data[index].name
+        this.form.id = data[index].id
       },
       deleteRow(index, data) {
         console.log("删除", data[index])
@@ -93,17 +93,26 @@
       },
       addNew() {
         this.dialogFormVisible = true
-
+        this.form.name = ''
+        this.form.id = ''
+        this.dialogtitle = '新增分类'
       },
       confirm() {
-        if (this.dialogtitle==="新增分类") {
+        if (this.dialogtitle === "新增分类") {
 
           this.dialogFormVisible = false
           console.log(this.form)
           this.$http.post('/api/kind/addKind',
-            this.form
+            {name:this.form.name}
           ).then(res => {
-
+            if (res.data.code == 200) {
+              this.$message({
+                message: '新增成功！',
+                type: 'success'
+              });
+              this.dialogFormVisible = false
+              this.$refs.tablelist.refreshList()
+            }
           })
         } else {
           this.dialogFormVisible = false
@@ -111,7 +120,14 @@
           this.$http.post('/api/kind/updatekind',
             this.form
           ).then(res => {
-
+            if (res.data.code == 200) {
+              this.$message({
+                message: '修改成功！',
+                type: 'success'
+              });
+              this.dialogFormVisible = false
+              this.$refs.tablelist.refreshList()
+            }
           })
         }
       }
