@@ -100,15 +100,13 @@ export default {
       this.cgetList({ pageNo: page })
     },
     cgetList(data = {}){
-
       const params = Object.assign(this.params,data)
       console.log(params)
       this.getList(params).then(res=>{
         let data=res.data.content
           this.tableData = data.records
-          this.total=data.total
-          this.currentPage=data.current
-          console.log(res.data)
+          this.total=data.total*1
+          this.currentPage=data.current*1
       })
     },
     refreshList (params) {
