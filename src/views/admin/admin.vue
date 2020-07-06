@@ -31,14 +31,13 @@
 </script>
 
 <style lang="less">
-  @import "../../assets/css/common.less";
  .main{
    display: flex;
    width: 100%;
     justify-content: space-between;
  }
 .header{
-  background-color: @blue;
+  background-color: #447bb2;
   color: #FFFFff;
   height: 8vh;
   line-height: 8vh;

@@ -1,19 +1,19 @@
 <template>
   <div class="content">
-    <List :getList="getArticleList" ref="list">
+    <List :getList="getArticleList" ref=" tablelist">
       <template slot="extra-action">
         <el-button type="primary" @click="addNewArticle">新增</el-button>
       </template>
       <template slot="table">
-        <el-table-column prop="title" label="标题" width="180">
+        <el-table-column prop="title" label="标题">
         </el-table-column>
-        <el-table-column prop="author" label="作者" width="180">
+        <el-table-column prop="author" label="作者" width="180px">
         </el-table-column>
-        <el-table-column prop="createAt" label="创建时间">
+        <el-table-column prop="createAt" label="创建时间"  width="200px">
         </el-table-column>
-        <el-table-column prop="updateAt" label="更新时间">
+        <el-table-column prop="updateAt" label="更新时间"  width="200px">
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="200px">
           <template slot-scope="scope">
             <el-button @click.native.prevent="edit(scope.$index, tableData)" type="primary" size="small">
               编辑
@@ -97,10 +97,11 @@
               id: data[index].id
             }
           }).then(res => {
-           /* this.$message({
-              type: 'success',
-              message: '删除成功!'
-            }); */
+             this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+               this.$refs.tablelist.refreshList()
           })
         }).catch(() => {
           this.$message({

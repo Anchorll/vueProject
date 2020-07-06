@@ -19,6 +19,7 @@
         </slot>
       </el-form>
     </div>
+    <div class="tablediv">
     <el-table
       :data="tableData"
       element-loading-text="拼命加载中"
@@ -29,6 +30,7 @@
     >
       <slot name="table"></slot>
     </el-table>
+    </div>
     <div class="padding">
       <slot name="footer-action" />
     </div>
@@ -111,18 +113,29 @@ export default {
     },
     refreshList (params) {
       console.log('params: ', params)
-      const page = (this.currentPage = 1)
+      let page =this.currentPage
+      if(params){
+         page = (this.currentPage = 1)
+      }
       this.cgetList({ pageNo: page,pageSize:10,params })
     },
   }
 }
 </script>
-<style lang="less">
+<style lang="less" scoped="scoped">
 .action-wrapper{
   padding: 10px;
   text-align: right;
 }
 .pagination{
   margin: 20px;
+  text-align: right;
 }
+/deep/ .cell{
+  text-align: center;
+}
+.tablediv{
+  min-height: 73vh;
+}
+
 </style>

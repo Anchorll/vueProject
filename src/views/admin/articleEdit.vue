@@ -1,30 +1,29 @@
 <template>
   <div class="content">
   <div class="cmain">
-     <el-form :model="formData" :rules="rules" size="small" ref="form" label-width="150px">
-       <el-form-item label="标题：" prop="title">
-         <el-input v-model="formData.title" type="text" placeholder="请输入标题" show-word-limit maxlength="50"></el-input>
-       </el-form-item>
-       <el-form-item label="分类：" prop="kind">
-          <el-select v-model="formData.kind" placeholder="请选择分类">
-                <el-option v-for="(item,index) in kindArray" :label="item.name" :value="item.id" :key="item.id"></el-option>
-          </el-select>
-       </el-form-item>
-       <el-form-item label="标签：" prop="tag">
-         <el-checkbox-group v-model="formData.checkList">
-            <el-checkbox :label="item.name" name="tag" v-for="(item,index) in tag" :key="item.id"></el-checkbox>
-          </el-checkbox-group>
-       </el-form-item>
-       <!-- <el-form-item label="附件添加：" prop=""></el-form-item> -->
-       <el-form-item label="内容：" prop="content">
-         <editor :content="formData.content" :catchData="catchData"></editor>
-       </el-form-item>
+    <el-form ref="form" :model="formData" label-width="80px" class="form">
+      <el-form-item label="标题：" prop="title">
+        <el-input v-model="formData.title" type="text" placeholder="请输入标题" show-word-limit maxlength="50"></el-input>
+      </el-form-item>
+      <el-form-item label="分类：" prop="kind">
+        <el-select v-model="formData.kind" placeholder="请选择分类">
+           <el-option v-for="(item,index) in kindArray" :label="item.name" :value="item.id" :key="item.id"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="标签：" prop="tag">
+        <el-checkbox-group v-model="formData.checkList">
+           <el-checkbox :label="item.name" name="tag" v-for="(item,index) in tag" :key="item.id"></el-checkbox>
+         </el-checkbox-group>
+      </el-form-item>
+      <el-form-item label="内容：" prop="content">
+        <editor :content="formData.content" :catchData="catchData"></editor>
+      </el-form-item>
 
-     </el-form>
-     <div class="btn-box">
-       <el-button size="small" type="primary"  @click="submit">提交</el-button>
-     </div>
-
+      <el-form-item>
+        <el-button type="primary" @click="submit">提交</el-button>
+        <el-button>取消</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 
   </div>
@@ -131,9 +130,10 @@
   }
 </script>
 
-<style>
-  .el-form{
+<style lang="less" scoped>
+  .form{
     width: 500px;
+    padding-top: 20px;
   }
 
 </style>

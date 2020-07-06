@@ -6,13 +6,13 @@
           <el-button type="primary" @click="addNew">新增</el-button>
         </template>
         <template slot="table">
-          <el-table-column prop="name" label="名称" width="180">
+          <el-table-column prop="name" label="名称">
           </el-table-column>
-          <el-table-column prop="createAt" label="创建时间" width="180">
+          <el-table-column prop="createAt" label="创建时间" width="280">
           </el-table-column>
-          <el-table-column prop="updateAt" label="更新时间" width="180">
+          <el-table-column prop="updateAt" label="更新时间" width="280">
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column label="操作"  width="280">
             <template slot-scope="scope">
               <el-button @click.native.prevent="edit(scope.$index, tableData)" type="primary" size="small">
                 编辑
@@ -84,10 +84,18 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+          this.$http.delete('/api/tab-label/delLabel',{
+            params:{
+              id:data[index].id
+            }
+          }).then(res => {
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+             this.$refs.tablelist.refreshList()
+          })
+
         }).catch(() => {
           this.$message({
             type: 'info',
