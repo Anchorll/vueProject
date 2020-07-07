@@ -10,6 +10,7 @@
         class="search-form"
         label-position="right"
         size="small"
+        stripe
       >
         <slot name="form"></slot>
         <div class="action-wrapper">
@@ -96,6 +97,8 @@ export default {
   methods: {
     handleSizeChange (size) {
       console.log(size)
+      this.params.pageSize=size
+      this.refreshList({pageNo:1})
     },
     handleCurrentChange (page) {
       this.currentPage = page
@@ -117,7 +120,7 @@ export default {
       if(params){
          page = (this.currentPage = 1)
       }
-      this.cgetList({ pageNo: page,pageSize:10,params })
+      this.cgetList({ pageNo: page,pageSize:this.params.pageSize,params })
     },
   }
 }
@@ -135,7 +138,9 @@ export default {
   text-align: center;
 }
 .tablediv{
-  min-height: 73vh;
+  min-height: 75vh;
+  max-height: 75vh;
+  overflow-y: auto;
 }
 
 </style>

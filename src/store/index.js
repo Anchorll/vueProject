@@ -42,7 +42,7 @@ const store = new Vuex.Store({
      /* localStorage.setItem(isLogin, value)*/
     },
     $_setStorage (state, value) {
-    	console.log(value);
+    	//console.log(value);
       state.user = value
      /* localStorage.setItem(key, JSON.stringify(value))*/
     },

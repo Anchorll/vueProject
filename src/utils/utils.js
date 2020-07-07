@@ -19,3 +19,24 @@ export const replaceAllImg = (html) => {
     return newContent;
 
 };
+export function setCookies(name,value,days){
+
+      var d = new Date;
+
+      d.setTime(d.getTime() + 24*60*60*1000*days);
+
+      window.document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+}
+export function getCookies(name) {
+
+    var v = window.document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+
+    return v ? v[2] : null;
+
+}
+
+export function deleteCookies(name) {
+
+    this.setCookies(name, '', -1);
+
+}

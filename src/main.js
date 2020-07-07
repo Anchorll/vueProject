@@ -17,7 +17,7 @@ const myPlugins = function (Vue,) {
 Vue.use(myPlugins)
 Vue.use(ElementUI)
 Vue.prototype.$http=axios
-Vue.prototype.$store=store 
+Vue.prototype.$store=store
 Vue.use(less)
 Vue.use(VueLazyload, {
 
@@ -26,10 +26,18 @@ Vue.use(VueLazyload, {
   loading: 'dist/loading.gif'
 
 });
+
 router.beforeEach((to, from, next) => {
   console.log("to")
   if (to.matched.some(m => m.meta.auth)) {
-    if (store.getters.getIsLogin === '1') {
+   let sessionData=sessionStorage.getItem("store")
+    let isLogin
+   if(sessionData){
+     isLogin=JSON.parse(sessionData).isLogin
+   }else{
+      isLogin=0
+   }
+    if (isLogin === '1') {
       next()
     } else if (to.path !== '/') {
       next({path: '/login'})
