@@ -26,6 +26,7 @@
       element-loading-text="拼命加载中"
       border
       ref="table"
+      stripe
       :header-cell-style="{background: '#F7F7F9', padding: '4px', color: 'black',}"
       :cell-style="{padding: '5px', overflow: 'unset', lineHeight: '100%'}"
     >

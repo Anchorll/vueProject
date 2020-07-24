@@ -47,15 +47,17 @@
           if (!valid) return
           this.$http.post("/api/tab_user/login", this.form).then(res => {
             if (res.data.code == 200) {
+            console.log("loigin")
               this.$store.commit('$_setLogin', '1')
               this.$store.commit('$_setStorage', res.data.content)
+               sessionStorage.setItem("store",JSON.stringify(this.$store.state))
               this.$router.push({
                 name: 'admin'
               })
             }
           })
         })
-        
+
 
       }
     }

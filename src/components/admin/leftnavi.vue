@@ -31,6 +31,7 @@
           {name:"文章管理",path:"/admin/articleManage"},
           {name:"标签管理",path:"/admin/tagManage"},
           {name:"分类管理",path:"/admin/kindManage"},
+          {name:"说说编辑",path:"/admin/shuoshuo"},
           // {name:"用户管理",path:"/admin/adindex"}
         ]
       };

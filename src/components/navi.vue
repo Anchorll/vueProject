@@ -3,7 +3,7 @@
     <header>
      <div class="blog-info">
        <p class="blog-title" @click="gotoAdmin">xxxxxxxxx</p>
-       <p class="weather-info">天气预报|公告</p>
+       <p class="weather-info">{{weather}}|公告</p>
      </div>
      <div class="menu">
          <el-menu
@@ -33,8 +33,14 @@
             {name:"分类",path:"/Manage"},
             {name:"关于我",path:"/PersonalCenter"},
           ],
+          hostip:'',
           count:0,
+          cityId:'',
+          weather:'晴，26℃'
         };
+      },
+      mounted() {
+        this.getWeather()
       },
       methods: {
         handleSelect(key, keyPath) {
@@ -45,8 +51,28 @@
           if(this.count==7){
             this.$router.push({name: 'admin'})
           }
+        },
+        getWeather(){
+            this.$http.get('/api/weather/getIp').then(res=>{
+              this.hostip=res.data
+              this.$http.get('/api/weather/getCity',{
+                params:{
+                  ip:this.hostip
+                }
+              }).then(res=>{
+                  this.cityId=res.data
+                  console.log('this.cityId',this.cityId)
+                  this.$http.get('/api/weather/today',{
+                      params:{
+                        cityId:this.cityId
+                      }
+                  }).then(res=>{
+
+                  })
+              })
+            })
         }
-      }
+     }
     }
 </script>
 

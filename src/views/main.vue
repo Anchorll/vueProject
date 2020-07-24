@@ -24,18 +24,6 @@
 
 <style lang="less">
 @import "../assets/css/common.less";
-/* .bg{
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  left: 0px;
-  top: 0px;
-  background-image: url(../assets/img/space4.jpg);
-  background-position: center;
-  background-size: cover;
-  -webkit-filter:blur(5px);
-  	filter:blur(5px);
-} */
 .content{
   background-color: @whitegray;
 }

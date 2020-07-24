@@ -1,7 +1,7 @@
 <template>
   <div class="c-content">
-      <div class="operation" style="text-align: right;">
-      	<el-select v-model="qcondition" placeholder="按时间排序">
+      <div class="operation" style="text-align: right;" @change="change">
+      	<el-select v-model="qcondition" placeholder="请选择" >
       		<el-option label="按时间排序" value="1"></el-option>
       		<el-option label="按访问量排序" value="2"></el-option>
       		<el-option label="按评论数排序" value="3"></el-option>
@@ -9,13 +9,13 @@
       	<el-input v-model="qval" placeholder="请输入内容" style="width:200px">
       		<i slot="prefix" class="el-input__icon el-icon-search"></i>
       	</el-input>
-      	<el-button type="primary" class="query-btn" style="background-color: @red;" @click="">查询</el-button>
-        <el-button type="primary" class="query-btn" style="background-color: @red;" @click="">我要提问</el-button>
+      	<el-button type="primary" class="query-btn" style="background-color: @red;" @click="query">查询</el-button>
+        <el-button type="primary" class="query-btn" style="background-color: @red;" @click="ask">我要提问</el-button>
       </div>
     <ul class="list">
       <li v-for="(item,index) in tableData" :key="index" class="art-list" @click="go2Details(0,item.id)">
         <p class="art-title">{{item.title}}</p>
-        <p class="art-content">{{item.message}}</p>
+        <p class="art-content">{{filterHtml(item.message)}}</p>
         <p class="art-info">
           <span>{{item.updateAt}}</span>
           <span><img src="/static/img/icon/zhiboguankanshu.png">{{item.praiseNum>10000?'1w+':item.praiseNum}}</span>
@@ -44,6 +44,9 @@
       this.queryList()
     },
     methods:{
+      filterHtml(test){
+        return test.replace(/<[^>]+>|&[^>]+;/g, "")
+      },
       // handleSizeChange(val) {
 
       //   console.log("handleSizeChange:"+val)
@@ -64,6 +67,12 @@
         this.tableData=res.data.content.records
       })
 	  },
+    change(){
+
+    },
+    query(){
+    
+    },
 	  ask(){
 		  console.log("我要提问")
 	  }

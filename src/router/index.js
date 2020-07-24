@@ -14,6 +14,7 @@ import tagManage from '@/views/admin/tagManage.vue'
 import kindManage from '@/views/admin/kindManage.vue'
 import adindex from '@/views/admin/index.vue'
 import articleEdit from '@/views/admin/articleEdit.vue'
+import shuoShuo from '@/views/admin/shuoshuo.vue'
 Vue.use(Router)
 
 const originalPush = Router.prototype.push
@@ -90,6 +91,11 @@ export default new Router({
           name: 'kindManage',
           component: kindManage,
           path: '/admin/kindManage',
+        },
+        {
+          name: 'shuoShuo',
+          component: shuoShuo,
+          path: '/admin/shuoshuo',
         },
       ]
     }

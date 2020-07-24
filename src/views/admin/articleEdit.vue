@@ -91,24 +91,12 @@
          console.log(string)
       },
       getKind(){
-        this.$http.get('/api/kind/showKinds',{
-          params:{
-            pageNo:1,
-            pageSize:10
-          }
-        }).then( res => {
+        this.$http.get('/api/kind/showKinds').then( res => {
          this.kindArray=res.data.content
         })
-
-
       },
       getTag(){
-        this.$http.get('/api/tab-label/showLabels',{
-        params:{
-          pageNo:1,
-          pageSize:10
-        }
-        }).then( res => {
+        this.$http.get('/api/tab-label/showLabels').then( res => {
          this.tag=res.data.content
          console.log(this.formData.tag)
         })
